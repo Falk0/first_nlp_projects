@@ -2,13 +2,14 @@
 ## and visualize results. 
 
 import re 
-import pandas 
 import chardet
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 nltk.download('punkt')
 import matplotlib.pyplot as plt
+from collections import Counter
+
 
 class CountWords:
     # Create CountWords object, checking encoding if needed
@@ -16,6 +17,7 @@ class CountWords:
         self.path = path
         self.text = None
         self.tokens = None
+        self.word_count = None
         
         if encoding:
             self.encoding = encoding
@@ -36,6 +38,7 @@ class CountWords:
     def tokenizeText(self):
         self.tokens = word_tokenize(self.text)
     
+
     # Remove stopwords like and, is, or 
     def removeStopWords(self, language = 'english'):
         if self.tokens != None:
@@ -47,15 +50,21 @@ class CountWords:
             
         
 
-    def count(self):
-        pass
+    def countWords(self):
+        self.word_count = Counter(self.tokens)
 
 
     def lenText(self):
         print(len(self.text))
 
-    def plotStatistic(number = 5):
-        pass
+
+    def plotStatistic(self, number = 5):
+        top_words = self.word_count.most_common(number)
+        plt.bar([word[0] for word in top_words], [word[1] for word in top_words])
+        plt.xlabel('Words')
+        plt.ylabel('Frequency')
+        plt.title(f'Top {number} Words')
+        plt.show()
 
 
 
@@ -64,10 +73,11 @@ class CountWords:
 countedWords = CountWords('data/lorem.txt')
 
 
-countedWords.lenText()
 countedWords.cleanText()
-countedWords.lenText()
 countedWords.tokenizeText()
-print(len(countedWords.tokens))
+countedWords.countWords()
+countedWords.plotStatistic()
+
 countedWords.removeStopWords()
-print(len(countedWords.tokens))
+countedWords.countWords()
+countedWords.plotStatistic()
