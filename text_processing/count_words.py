@@ -22,13 +22,18 @@ class CountWords:
         if encoding:
             self.encoding = encoding
         else:
-            with open(self.path, 'rb') as file:
-                self.encoding = chardet.detect(file.read())['encoding']
-                print(f'File encoded as: {self.encoding}')
-    
-        with open(self.path, 'r', encoding=self.encoding) as file:
-            self.text = file.read()
-
+            try:
+                with open(self.path, 'rb') as file:
+                    self.encoding = chardet.detect(file.read())['encoding']
+                    print(f'File encoded as: {self.encoding}')
+            except Exception as e:
+                print(f'Error reading the file: {e}')
+        
+        try:
+            with open(self.path, 'r', encoding=self.encoding) as file:
+                self.text = file.read()
+        except Exception as e:
+            print(f'Error reading the file: {e}')
 
     # remove ,.:!? and change to lower case. 
     def cleanText(self):
@@ -52,6 +57,7 @@ class CountWords:
 
     def countWords(self):
         self.word_count = Counter(self.tokens)
+        return len(self.word_count)
 
 
     def lenText(self):
@@ -59,18 +65,21 @@ class CountWords:
 
 
     def plotStatistic(self, number = 5):
-        top_words = self.word_count.most_common(number)
-        plt.bar([word[0] for word in top_words], [word[1] for word in top_words])
-        plt.xlabel('Words')
-        plt.ylabel('Frequency')
-        plt.title(f'Top {number} Words')
-        plt.show()
+        if self.word_count:
+            top_words = self.word_count.most_common(number)
+            plt.bar([word[0] for word in top_words], [word[1] for word in top_words])
+            plt.xlabel('Words')
+            plt.ylabel('Frequency')
+            plt.title(f'Top {number} Words')
+            plt.show()
+        else: 
+            print('ERROR words not counted')
 
 
 
 
 
-countedWords = CountWords('data/lorem.txt')
+countedWords = CountWords('data/lorem1.txt')
 
 
 countedWords.cleanText()
@@ -80,4 +89,7 @@ countedWords.plotStatistic()
 
 countedWords.removeStopWords()
 countedWords.countWords()
-countedWords.plotStatistic()
+countedWords.plotStatistic(number=10)
+
+var = countedWords.countWords()
+print(var)
