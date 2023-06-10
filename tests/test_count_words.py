@@ -15,13 +15,19 @@ class TestCountWords(unittest.TestCase):
         self.assertEqual(self.count_words.text, 'hello this is a text ')
 
     def test_tokenizeText(self):
-        pass
+        self.count_words.text = 'hello this is a text'
+        self.count_words.tokenizeText()
+        self.assertEqual(self.count_words.tokens, ['hello', 'this', 'is', 'a', 'text'])
 
     def test_removeStopWords(self):
-        pass
+        self.count_words.tokens = ['hello', 'this', 'is', 'a', 'text']
+        self.count_words.removeStopWords()
+        self.assertEqual(self.count_words.tokens, ['hello', 'text'])
 
     def test_countWords(self):
-        pass
+        self.count_words.tokens = ['hello', 'text', 'example']
+        numberOfWords = self.count_words.countWords()
+        self.assertEqual(numberOfWords, 3)
         
    
 if __name__ == '__main__':
