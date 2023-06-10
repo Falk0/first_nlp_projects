@@ -79,7 +79,7 @@ class CountWords:
 
 
 
-countedWords = CountWords('data/lorem1.txt')
+'''countedWords = CountWords('data/test.txt')
 
 
 countedWords.cleanText()
@@ -92,4 +92,4 @@ countedWords.countWords()
 countedWords.plotStatistic(number=10)
 
 var = countedWords.countWords()
-print(var)
+print(var)'''
