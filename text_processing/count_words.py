@@ -42,6 +42,7 @@ class CountWords:
 
     def tokenizeText(self):
         self.tokens = word_tokenize(self.text)
+        return self.tokens
     
 
     # Remove stopwords like and, is, or 
