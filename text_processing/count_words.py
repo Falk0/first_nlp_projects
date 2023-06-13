@@ -76,21 +76,3 @@ class CountWords:
         else: 
             print('ERROR words not counted')
 
-
-
-
-
-'''countedWords = CountWords('data/test.txt')
-
-
-countedWords.cleanText()
-countedWords.tokenizeText()
-countedWords.countWords()
-countedWords.plotStatistic()
-
-countedWords.removeStopWords()
-countedWords.countWords()
-countedWords.plotStatistic(number=10)
-
-var = countedWords.countWords()
-print(var)'''

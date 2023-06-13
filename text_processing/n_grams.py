@@ -10,12 +10,12 @@ class NGram:
         self.counted_bigrams = None
 
     def generate_ngrams(self):
-        bigrams = zip(self.tokens, self.tokens[1:])
-        return bigrams
+        ngrams = zip(self.tokens, self.tokens[1:])
+        self.grams = ngrams
+        return ngrams
 
     def count_ngrams(self):
         counted_bigrams = Counter(self.bigrams)
         print(self.counted_bigrams)
 
 
-    
