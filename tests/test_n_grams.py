@@ -8,17 +8,16 @@ class TestNGrams(unittest.TestCase):
     
     def setUp(self):
         # Setup runs before each test case
-        self.ngrams = NGram()
+        self.ngrams = NGram(['this', 'is', 'a', 'sentence'])
         
 
 
     def test_generate_ngrams(self):
-        bigrams = self.ngrams(2, ['this', 'is', 'a', 'sentence'])
-        trigrams = self.ngrams(3, ['this', 'is', 'a', 'sentence'])
-        
-        self.assertEqual([['this', 'is'],['is', 'a'],['a', 'sentence']], bigrams)
-        #self.assertEqual(self.count_words.text, 'hello this is a text ')
-        pass
+        # Generate bigrams
+        self.ngrams.generate_ngrams(2)
+        self.assertEqual([['this', 'is'],['is', 'a'],['a', 'sentence']], self.ngrams.ngrams)
+        self.ngrams.generate_ngrams(3)
+        self.assertEqual([['this', 'is', 'a'],['is', 'a', 'sentence']], self.ngrams.ngrams)
 
     def count_ngrams(self):
         pass
