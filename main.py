@@ -1,7 +1,8 @@
 from text_processing.count_words import CountWords
 from text_processing.n_grams import NGram
 
-countedWords = CountWords('data/lorem.txt')
+
+countedWords = CountWords('data/brown_corpus.txt')
 
 
 countedWords.cleanText()
@@ -9,6 +10,7 @@ tokens = countedWords.tokenizeText()
 countedWords.countWords()
 countedWords.plotStatistic()
 
-ngrams = NGram(2, tokens)
-ngrams.generate_ngrams()
+ngrams = NGram(tokens)
+ngrams.generate_ngrams(3)
 ngrams.count_ngrams()
+ngrams.plotStatistic(5)

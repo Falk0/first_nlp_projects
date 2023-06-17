@@ -1,4 +1,5 @@
 from collections import Counter
+import matplotlib.pyplot as plt
 
 
 class NGram:
@@ -10,12 +11,27 @@ class NGram:
 
     def generate_ngrams(self, n):
         ngrams = zip(*[self.tokens[i:] for i in range(n)])
-        ngrams_list = [list(item) for item in ngrams]
-        self.ngrams = list(ngrams_list)
-
+        ngrams_list = list(ngrams)
+        self.grams = ngrams_list
+        return self.grams
 
     def count_ngrams(self):
-        counted_grams = Counter(self.bigrams)
-        print(self.counted_bigrams)
+        self.counted_grams = Counter(self.grams)
+        return self.counted_grams
 
+    def plotStatistic(self, number = 5):
+        if self.counted_grams:
+            grams = self.count_ngrams()
+            top_grams = grams.most_common(number)
+            gram_labels = [str(gram) for gram, count in top_grams]
+            gram_counts = [count for gram, count in top_grams]
+            
+            plt.bar(gram_labels, gram_counts)
+            plt.xticks(rotation=90, ha='right')
+            plt.xlabel('Grams')
+            plt.ylabel('Frequency')
+            plt.title(f'Top {number} grams')
+            plt.show()
+        else: 
+            print('ERROR words not counted')
 
