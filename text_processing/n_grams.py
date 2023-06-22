@@ -5,10 +5,14 @@ import matplotlib.pyplot as plt
 class NGram:
     # Create NGram object,
     def __init__(self, tokens):
-        self.tokens = tokens
-        self.grams = None
-        self.counted_grams = None
-
+        if type(tokens) == list: 
+            self.tokens = tokens
+            self.grams = None
+            self.counted_grams = None
+        else:
+            print('Tokens must be a list')
+        
+    # Generate n-grams 
     def generate_ngrams(self, n):
         ngrams = zip(*[self.tokens[i:] for i in range(n)])
         ngrams_list = list(ngrams)
@@ -18,6 +22,10 @@ class NGram:
     def count_ngrams(self):
         self.counted_grams = Counter(self.grams)
         return self.counted_grams
+    
+    def get_specific_ngram(self, ngram):
+        return self.counted_grams.get(ngram, 0)
+        
 
     def plotStatistic(self, number = 5):
         if self.counted_grams:

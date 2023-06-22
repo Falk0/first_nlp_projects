@@ -7,10 +7,14 @@ countedWords = CountWords('data/brown_corpus.txt')
 
 countedWords.cleanText()
 tokens = countedWords.tokenizeText()
-countedWords.countWords()
-countedWords.plotStatistic()
+#countedWords.removeStopWords()
+#countedWords.countWords()
+#countedWords.plotStatistic()
 
 ngrams = NGram(tokens)
 ngrams.generate_ngrams(3)
 ngrams.count_ngrams()
-ngrams.plotStatistic(5)
+test = ngrams.get_specific_ngram(('as', 'well', 'as'))
+print(test)
+ngrams.plotStatistic()
+
