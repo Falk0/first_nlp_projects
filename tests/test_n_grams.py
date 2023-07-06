@@ -27,9 +27,6 @@ class TestNGrams(unittest.TestCase):
         self.assertEqual([('this', 'is', 'a'),('is', 'a', 'sentence')], test2)
 
 
-
-
-        
    
 if __name__ == '__main__':
     unittest.main()
