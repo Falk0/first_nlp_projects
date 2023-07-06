@@ -13,15 +13,11 @@ class NGram:
             print('Tokens must be a list')
         
     # Generate n-grams 
-    def generate_ngrams(self, n):
+    def generate_and_count_ngrams(self, n):
         ngrams = zip(*[self.tokens[i:] for i in range(n)])
-        ngrams_list = list(ngrams)
-        self.grams = ngrams_list
-        return self.grams
-
-    def count_ngrams(self):
-        self.counted_grams = Counter(self.grams)
+        self.counted_grams = Counter(ngrams)
         return self.counted_grams
+    
     
     def get_specific_ngram(self, ngram):
         return self.counted_grams.get(ngram, 0)
@@ -29,8 +25,7 @@ class NGram:
 
     def plotStatistic(self, number = 5):
         if self.counted_grams:
-            grams = self.count_ngrams()
-            top_grams = grams.most_common(number)
+            top_grams = self.counted_grams.most_common(number)
             gram_labels = [str(gram) for gram, count in top_grams]
             gram_counts = [count for gram, count in top_grams]
             
