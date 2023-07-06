@@ -7,7 +7,6 @@ class NGram:
     def __init__(self, tokens):
         if type(tokens) == list: 
             self.tokens = tokens
-            self.grams = None
             self.counted_grams = None
         else:
             print('Tokens must be a list')

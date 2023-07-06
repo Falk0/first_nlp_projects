@@ -13,7 +13,6 @@ countedWords.plotStatistic()
 
 ngrams = NGram(tokens)
 ngrams.generate_and_count_ngrams(3)
-test = ngrams.get_specific_ngram(('as', 'well', 'as'))
-print(test)
+ngrams.get_specific_ngram(('as', 'well', 'as'))
 ngrams.plotStatistic()
 
