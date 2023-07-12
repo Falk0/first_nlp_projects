@@ -1,6 +1,7 @@
 from collections import Counter, defaultdict
 import matplotlib.pyplot as plt
-
+import random
+import numpy as np
 
 class Markovchain_generator:
     # Create NGram object,
@@ -24,9 +25,11 @@ class Markovchain_generator:
 
         return probability_dict
 
+
     def most_common_next(self, word):
         # pick out the most common word that follow input word
         most_common_word = self.transition_dict[word].most_common(1)[0][0]
+            
         return most_common_word
     
     def generate_sentence(self, n, word):
@@ -36,9 +39,23 @@ class Markovchain_generator:
         
         for i in range(n):
             #genereate the next word and add to sentence
-            next_word = self.most_common_next(word)
-            sentence.append(self.most_common_next(next))
+            next_word = self.weighted_random_choice(self.transition_dict[word])
+            sentence.append(next_word)
             word = next_word
 
         return sentence
+    
+    import random
+
+    def weighted_random_choice(self, choices):
+        """
+        Make a weighted random choice from a dictionary where the keys are the choices and the
+        values are the weights.
+        """
+        total_prob = sum(choices.values())
+        probs = [p / total_prob for p in choices.values()]
+        chosen_key = np.random.choice(list(choices.keys()), p=probs)
+
+        return chosen_key
+
  
